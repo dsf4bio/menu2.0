@@ -1,306 +1,372 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Menu Digitale con Upsell – DSFabio Digital</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: #1f2937;
-      color: #fff;
-    }
-    h1, h2, h3 {
-      color: #facc15;
-      margin-bottom: 0.6rem;
-    }
-    section {
-      padding: 4rem 6vw;
-      max-width: 1200px;
-      margin: auto;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Menu Digitale con Upsell – DSFabio Digital</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+<style>
+  body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: #1f2937;
+    color: #fff;
+  }
+  h1, h2, h3 {
+    color: #facc15;
+    margin-bottom: 0.6rem;
+  }
+  section {
+    padding: 3rem 6vw;
+    max-width: 1100px;
+    margin: auto;
+  }
+  .hero {
+    text-align: left;
+    background: linear-gradient(135deg, #111827, #374151);
+    padding: 4rem 6vw;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 3rem;
+  }
+  .hero-text {
+    flex: 1 1 450px;
+  }
+  .hero h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    line-height: 1.1;
+  }
+  .hero p {
+    font-size: 1.15rem;
+    color: #d1d5db;
+    margin-bottom: 1.8rem;
+    line-height: 1.5;
+  }
+  .hero img {
+    flex: 1 1 450px;
+    max-width: 450px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(250,204,21,0.5);
+  }
+
+  /* Benefici */
+  .benefits li {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    position: relative;
+    padding-left: 2.8rem;
+    line-height: 1.4;
+    color: #fff;
+    max-width: 700px;
+  }
+  .benefits li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 1.5rem;
+    color: #facc15;
+    font-weight: 900;
+    line-height: 1;
+    transform: translateY(0.2rem);
+    text-shadow: 0 0 5px #facc15;
+  }
+  .benefits {
+    margin-bottom: 3rem;
+  }
+
+  /* Prezzo */
+  .price-section {
+    background: #374151;
+    padding: 3rem 2.5rem;
+    border-radius: 14px;
+    max-width: 700px;
+    margin: 3rem auto 4rem auto;
+    box-shadow: 0 8px 30px rgba(250,204,21,0.5);
+    color: #fff;
+    text-align: center;
+    line-height: 1.4;
+  }
+  .price-section p {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+    color: #facc15;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+  }
+  .price-section strong {
+    font-size: 3.4rem;
+    color: #facc15;
+    display: block;
+    margin: 0.5rem 0 0.3rem 0;
+    font-weight: 900;
+    text-shadow: 0 0 12px #facc15;
+    line-height: 1.1;
+  }
+  .price-section span {
+    font-size: 1.2rem;
+    color: #eab308;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 1.8rem;
+  }
+  .price-section ul {
+    text-align: left;
+    max-width: 480px;
+    margin: 0 auto 2rem auto;
+    list-style: none;
+    padding-left: 0;
+  }
+  .price-section ul li {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #f3f4f6;
+  }
+  .price-section ul li::before {
+    content: "✔";
+    position: absolute;
+    left: 0;
+    color: #facc15;
+    font-weight: 900;
+    font-size: 1.2rem;
+    line-height: 1;
+    top: 2px;
+    text-shadow: 0 0 5px #facc15;
+  }
+  .price-section small {
+    display: block;
+    font-size: 0.95rem;
+    color: #ccc;
+    font-style: italic;
+    max-width: 480px;
+    margin: 0 auto 0;
+    line-height: 1.3;
+  }
+
+  /* Bottone demo */
+  .btn-primary {
+    background: #facc15;
+    color: #1f2937;
+    font-weight: 700;
+    padding: 1rem 2.8rem;
+    border-radius: 12px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.3s ease;
+    box-shadow: 0 6px 20px rgba(250,204,21,0.6);
+    font-size: 1.2rem;
+    user-select: none;
+  }
+  .btn-primary:hover,
+  .btn-primary:focus {
+    background: #eab308;
+    box-shadow: 0 8px 25px rgba(234,179,8,0.8);
+    outline: none;
+  }
+
+  /* Form contatti */
+  .form-section {
+    max-width: 600px;
+    margin: 0 auto 4rem auto;
+  }
+  .form-section h2 {
+    margin-bottom: 1.8rem;
+    text-align: center;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background: #374151;
+    padding: 2rem;
+    border-radius: 14px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  }
+  input, textarea {
+    padding: 0.9rem 1rem;
+    border-radius: 10px;
+    border: none;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+  }
+  input:focus, textarea:focus {
+    outline: 2px solid #facc15;
+    background: #525961;
+    color: #fff;
+  }
+  textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+  button[type="submit"] {
+    background: #facc15;
+    color: #1f2937;
+    font-weight: 700;
+    font-size: 1.2rem;
+    padding: 1rem;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(250,204,21,0.7);
+    transition: background 0.3s ease;
+    user-select: none;
+  }
+  button[type="submit"]:hover,
+  button[type="submit"]:focus {
+    background: #eab308;
+    outline: none;
+    box-shadow: 0 8px 25px rgba(234,179,8,0.9);
+  }
+
+  footer {
+    text-align: center;
+    color: #888;
+    font-size: 0.9rem;
+    padding: 2rem 1rem;
+  }
+
+  /* WhatsApp floating button bottom-right */
+  .wa-float {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    z-index: 9999;
+  }
+  .wa-float a {
+    background: #25D366;
+    color: white;
+    font-weight: 700;
+    padding: 0.7rem 1.5rem 0.7rem 1.2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    user-select: none;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Inter', sans-serif;
+  }
+  .wa-float a svg {
+    width: 20px;
+    height: 20px;
+    fill: white;
+  }
+  .wa-float a:hover, .wa-float a:focus {
+    background: #1ebe57;
+    outline: none;
+  }
+
+  @media (max-width: 900px) {
     .hero {
-      text-align: left;
-      background: linear-gradient(135deg, #111827, #374151);
-      padding: 5rem 6vw;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 3rem;
-    }
-    .hero-text {
-      flex: 1 1 400px;
-    }
-    .hero h1 {
-      font-size: 3rem;
-      font-weight: 800;
-    }
-    .hero p {
-      font-size: 1.2rem;
-      color: #d1d5db;
-      margin-bottom: 1.8rem;
-      line-height: 1.5;
+      flex-direction: column;
+      text-align: center;
+      padding: 3rem 4vw;
     }
     .hero img {
-      flex: 1 1 400px;
-      max-width: 400px;
-      border-radius: 15px;
-      box-shadow: 0 8px 25px rgba(250,204,21,0.5);
+      max-width: 90vw;
+      margin: 0 auto;
     }
-
-    /* Vantaggi con enfasi */
+    .hero-text {
+      flex: unset;
+    }
     .benefits li {
-      margin-bottom: 1.8rem;
-      font-size: 1.2rem;
-      font-weight: 600;
-      position: relative;
-      padding-left: 3rem;
-      line-height: 1.4;
-      color: #fff;
-      max-width: 700px;
+      font-size: 1rem;
+      max-width: 100%;
     }
-    .benefits li::before {
-      content: "✓";
-      position: absolute;
-      left: 0;
-      top: 0;
-      font-size: 1.6rem;
-      color: #facc15;
-      font-weight: 900;
-      line-height: 1;
-      transform: translateY(0.2rem);
-      text-shadow: 0 0 5px #facc15;
-    }
-    .benefits {
-      margin-bottom: 3rem;
-    }
-
     .price-section {
-      background: #374151;
-      padding: 3rem 2rem;
-      border-radius: 12px;
-      text-align: center;
-      box-shadow: 0 8px 30px rgba(250,204,21,0.5);
-      max-width: 600px;
-      margin: 3rem auto 4rem auto;
+      padding: 2.5rem 1.5rem;
+      max-width: 100%;
     }
-    .price-section p {
-      font-size: 1.3rem;
-      color: #d1d5db;
-      margin-bottom: 0.8rem;
+  }
+  @media (max-width: 480px) {
+    h1 {
+      font-size: 2rem;
     }
     .price-section strong {
-      font-size: 3.2rem;
-      color: #facc15;
-      display: block;
-      margin: 0.5rem 0 0.3rem 0;
-      font-weight: 900;
-      text-shadow: 0 0 12px #facc15;
-      line-height: 1.1;
+      font-size: 2.4rem;
     }
-    .price-section span {
-      font-size: 1.1rem;
-      color: #eab308;
-      font-weight: 700;
-    }
-    .price-section small {
-      display: block;
-      margin-top: 1.3rem;
-      font-size: 1rem;
-      color: #ccc;
-      font-style: italic;
-      max-width: 420px;
-      margin-left: auto;
-      margin-right: auto;
-      line-height: 1.3;
-    }
-
     .btn-primary {
-      background: #facc15;
-      color: #1f2937;
-      font-weight: 700;
-      padding: 1rem 2.5rem;
-      border-radius: 10px;
-      text-decoration: none;
-      display: inline-block;
-      transition: background 0.3s ease;
-      box-shadow: 0 6px 20px rgba(250,204,21,0.6);
-      font-size: 1.2rem;
-      user-select: none;
-    }
-    .btn-primary:hover,
-    .btn-primary:focus {
-      background: #eab308;
-      box-shadow: 0 8px 25px rgba(234,179,8,0.8);
-      outline: none;
-    }
-
-    .form-section {
-      max-width: 600px;
-      margin: 0 auto 4rem auto;
-    }
-    .form-section h2 {
-      margin-bottom: 1.8rem;
-      text-align: center;
-    }
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      background: #374151;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-    }
-    input, textarea {
-      padding: 0.9rem 1rem;
-      border-radius: 8px;
-      border: none;
       font-size: 1rem;
-      font-family: 'Inter', sans-serif;
+      padding: 0.9rem 2rem;
     }
-    input:focus, textarea:focus {
-      outline: 2px solid #facc15;
-      background: #525961;
-      color: #fff;
-    }
-    textarea {
-      resize: vertical;
-      min-height: 120px;
-    }
-    button[type="submit"] {
-      background: #facc15;
-      color: #1f2937;
-      font-weight: 700;
-      font-size: 1.2rem;
-      padding: 1rem;
-      border-radius: 10px;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 6px 20px rgba(250,204,21,0.7);
-      transition: background 0.3s ease;
-      user-select: none;
-    }
-    button[type="submit"]:hover,
-    button[type="submit"]:focus {
-      background: #eab308;
-      outline: none;
-      box-shadow: 0 8px 25px rgba(234,179,8,0.9);
-    }
-
-    footer {
-      text-align: center;
-      color: #888;
-      font-size: 0.9rem;
-      padding: 2rem 1rem;
-    }
-
-    /* WhatsApp Floating */
-    .wa-float {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 100;
-    }
-    .wa-float a {
-      background: #25D366;
-      color: white;
-      font-weight: 700;
-      padding: 1rem 1.5rem;
-      border-radius: 50px;
-      text-decoration: none;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
-      user-select: none;
-      font-size: 1.2rem;
-    }
-    .wa-float a:hover, .wa-float a:focus {
-      background: #1ebe57;
-      outline: none;
-    }
-
-    @media (max-width: 900px) {
-      .hero {
-        flex-direction: column;
-        text-align: center;
-      }
-      .hero img {
-        max-width: 80vw;
-        margin: 0 auto;
-      }
-      .hero-text {
-        flex: unset;
-      }
-    }
-    @media (max-width: 480px) {
-      h1 {
-        font-size: 2rem;
-      }
-      .price-section strong {
-        font-size: 2.4rem;
-      }
-      .btn-primary {
-        font-size: 1rem;
-        padding: 0.9rem 2rem;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
 
-  <section class="hero" aria-label="Presentazione servizio Menu Digitale con Upsell">
-    <div class="hero-text">
-      <h1>Menu Digitale + Ordinazione WhatsApp + Upsell Smart</h1>
-      <p>Il pacchetto completo <strong>chiavi in mano</strong> che trasforma il tuo locale: più ordini, più vendite, meno stress.</p>
-      <a href="#demo" class="btn-primary">Prova la demo reale</a>
-    </div>
-    <img src="https://i.postimg.cc/W40NCLBd/upsell.webp" alt="Schermata esempio menu digitale con upsell" />
-  </section>
-
-  <section aria-label="Perché scegliere il nostro menu digitale">
-    <h2>Perché questo servizio fa la differenza?</h2>
-    <ul class="benefits" role="list">
-      <li><strong>Hosting e dominio gratis</strong>: niente costi nascosti, il tuo menu è sempre online e veloce.</li>
-      <li><strong>Modifiche e aggiornamenti veloci</strong>: basta chiedere, entro 30 minuti cambio menu, prezzi o prodotti per te, senza costi aggiuntivi.</li>
-      <li><strong>QR code pronto all’uso</strong>: stampalo subito e fallo scansionare ai clienti, senza complicazioni o attese.</li>
-      <li><strong>Ordini via WhatsApp</strong>: i clienti ordinano comodamente dal tavolo, riduci errori e velocizzi il servizio.</li>
-      <li><strong>Upsell intelligente</strong>: suggerimenti automatici per aumentare lo scontrino medio senza fatica.</li>
-      <li><strong>Pacchetto completo chiavi in mano</strong>: tu chiedi, io faccio tutto. Zero pensieri, solo risultati.</li>
-    </ul>
-  </section>
-
-  <section id="demo" aria-label="Demo reale menu digitale">
-    <h2>Prova subito la demo reale</h2>
-    <div style="text-align:center; margin-bottom:3rem;">
-      <a href="demo-menu-upsell.html" class="btn-primary" target="_blank" rel="noopener noreferrer" aria-label="Prova la demo reale del menu digitale con upsell">Prova la demo reale</a>
-    </div>
-  </section>
-
-  <section class="price-section" aria-label="Prezzo del servizio menu digitale">
-    <p><strong>Offerta Speciale Completa</strong></p>
-    <strong>289€/anno</strong>
-    <span>(solo 0,79€ al giorno)</span>
-    <small>Nessun costo nascosto, hosting e dominio inclusi, aggiornamenti illimitati e assistenza rapida.</small>
-  </section>
-
-  <section class="form-section" aria-label="Contatto per informazioni e preventivi">
-    <h2>Contattami per maggiori informazioni</h2>
-    <form>
-      <input type="text" name="nome" placeholder="Nome" required aria-required="true" />
-      <input type="email" name="email" placeholder="Email" required aria-required="true" />
-      <textarea name="messaggio" maxlength="700" placeholder="Scrivimi il tuo messaggio (max 700 caratteri)"></textarea>
-      <button type="submit" aria-label="Invia richiesta">Invia Richiesta</button>
-    </form>
-  </section>
-
-  <div class="wa-float" aria-label="Contatto WhatsApp rapido">
-    <a href="https://wa.me/393440301412" aria-label="Contattami su WhatsApp">💬 WhatsApp</a>
+<section class="hero" aria-label="Presentazione servizio Menu Digitale con Upsell">
+  <div class="hero-text">
+    <h1>Menu Digitale + Ordinazione WhatsApp + Upsell Smart</h1>
+    <p>Il pacchetto completo <strong>chiavi in mano</strong> che trasforma il tuo locale: più ordini, più vendite, meno stress.</p>
+    <a href="#demo" class="btn-primary">Prova la demo reale</a>
   </div>
+  <img src="https://i.postimg.cc/W40NCLBd/upsell.webp" alt="Schermata esempio menu digitale con upsell" />
+</section>
 
-  <footer>
-    © 2025 DSFabio digital – Tutti i diritti riservati
-  </footer>
+<section aria-label="Perché scegliere il nostro menu digitale">
+  <h2>Perché questo servizio fa la differenza?</h2>
+  <ul class="benefits" role="list">
+    <li><strong>Hosting e dominio gratis</strong>: niente costi nascosti, il tuo menu è sempre online e veloce.</li>
+    <li><strong>Modifiche e aggiornamenti veloci</strong>: basta chiedere, entro 30 minuti cambio menu, prezzi o prodotti per te, senza costi aggiuntivi.</li>
+    <li><strong>QR code pronto all’uso</strong>: stampalo subito e fallo scansionare ai clienti, senza complicazioni o attese.</li>
+    <li><strong>Ordini via WhatsApp</strong>: i clienti ordinano comodamente dal tavolo, riduci errori e velocizzi il servizio.</li>
+    <li><strong>Upsell intelligente</strong>: suggerimenti automatici per aumentare lo scontrino medio senza fatica.</li>
+    <li><strong>Pacchetto completo chiavi in mano</strong>: tu chiedi, io faccio tutto. Zero pensieri, solo risultati.</li>
+  </ul>
+</section>
+
+<section id="demo" aria-label="Demo reale menu digitale">
+  <h2>Prova subito la demo reale</h2>
+  <div style="text-align:center; margin-bottom:3rem;">
+    <a href="demo-menu-upsell.html" class="btn-primary" target="_blank" rel="noopener noreferrer" aria-label="Prova la demo reale del menu digitale con upsell">Prova la demo reale</a>
+  </div>
+</section>
+
+<section class="price-section" aria-label="Prezzo e dettagli servizio menu digitale">
+  <p><strong>Offerta Speciale Completa</strong></p>
+  <strong>289€/anno</strong>
+  <span>(solo 0,79€ al giorno)</span>
+  <ul>
+    <li>Hosting e dominio inclusi senza costi extra</li>
+    <li>Aggiornamenti, modifiche e inserimenti nuovi prodotti <strong>illimitati e gratuiti</strong></li>
+    <li>Assistenza rapida entro 30 minuti dalla richiesta</li>
+    <li>QR Code pronto da stampare e distribuire subito</li>
+    <li>Integrazione ordinazioni via WhatsApp, semplice e immediata</li>
+    <li>Sistema upsell automatico per aumentare lo scontrino medio</li>
+    <li>Nessuna ristampa necessaria, risparmi tempo e denaro</li>
+    <li>Pacchetto chiavi in mano: tu chiedi, io faccio tutto per te</li>
+  </ul>
+  <small>Un investimento piccolo per un salto di qualità enorme nel tuo servizio.</small>
+</section>
+
+<section class="form-section" aria-label="Contatto per informazioni e preventivi">
+  <h2>Contattami per maggiori informazioni</h2>
+  <form>
+    <input type="text" name="nome" placeholder="Nome" required aria-required="true" />
+    <input type="email" name="email" placeholder="Email" required aria-required="true" />
+    <textarea name="messaggio" maxlength="700" placeholder="Scrivimi il tuo messaggio (max 700 caratteri)"></textarea>
+    <button type="submit" aria-label="Invia richiesta">Invia Richiesta</button>
+  </form>
+</section>
+
+<div class="wa-float" aria-label="Contatto WhatsApp rapido">
+  <a href="https://wa.me/393440301412" aria-label="Mandami un messaggio WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.52 3.48A11.962 11.962 0 0 0 3.48 20.52l-1.75 6.42 6.57-1.77A11.96 11.96 0 0 0 20.52 3.48Zm-8.23 15.67a7.505 7.505 0 0 1-3.8-1.05l-.27-.16-2.25.6.6-2.25-.17-.28a7.518 7.518 0 1 1 5.89 3.14Zm3.2-4.35-.13-.2a1.66 1.66 0 0 0-1.32-.77 1.12 1.12 0 0 0-.97.56c-.2.27-.48.66-.7.9-.3.35-.5.45-.75.27a5.68 5.68 0 0 1-1.7-1.4c-.27-.34-1.1-.99-1.1-1.9 0-.56.17-.78.52-1.17.12-.14.12-.27 0-.43l-.2-.35a.42.42 0 0 0-.59-.13 2.24 2.24 0 0 0-1.55.73 6.44 6.44 0 0 0-1.87 4.52 7.08 7.08 0 0 0 3.25 5.41 7.44 7.44 0 0 0 5.84 1.25 5.97 5.97 0 0 0 3.63-2.94c.3-.51.3-.95.22-1.1-.08-.15-.27-.24-.56-.43Z"/></svg>
+    Mandami un messaggio
+  </a>
+</div>
+
+<footer>
+  © 2025 DSFabio digital – Tutti i diritti riservati
+</footer>
 
 </body>
 </html>
