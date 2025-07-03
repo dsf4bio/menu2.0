@@ -173,6 +173,76 @@
       text-shadow: 0 0 10px #fbbf24;
     }
 
+    /* Form contatti */
+    form.contact-form {
+      background: #111827;
+      max-width: 700px;
+      margin: 0 auto 5rem auto;
+      padding: 2rem 2.5rem;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(250, 204, 21, 0.5);
+      color: #f3f4f6;
+    }
+    form.contact-form label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+    form.contact-form input[type="text"],
+    form.contact-form input[type="email"],
+    form.contact-form textarea {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border-radius: 10px;
+      border: 2px solid #facc15;
+      background: #1f2937;
+      color: #f3f4f6;
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      resize: vertical;
+      transition: border-color 0.3s ease;
+    }
+    form.contact-form input[type="text"]:focus,
+    form.contact-form input[type="email"]:focus,
+    form.contact-form textarea:focus {
+      border-color: #fbbf24;
+      outline: none;
+      background: #272f42;
+    }
+    form.contact-form textarea {
+      min-height: 120px;
+      font-size: 1.05rem;
+      line-height: 1.4;
+    }
+    form.contact-form button {
+      margin-top: 1.5rem;
+      background-color: #facc15;
+      color: #1f2937;
+      font-weight: 700;
+      padding: 1rem 2.5rem;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgb(250 204 21 / 0.7);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      display: block;
+      width: 100%;
+    }
+    form.contact-form button:hover, form.contact-form button:focus {
+      background-color: #eab308;
+      box-shadow: 0 12px 30px rgb(234 179 8 / 0.9);
+      outline: none;
+    }
+    form.contact-form .required-note {
+      font-size: 0.85rem;
+      color: #fde68a;
+      margin-top: -0.8rem;
+      margin-bottom: 1.2rem;
+      font-style: italic;
+    }
+
     /* Pulsante WhatsApp fisso */
     .whatsapp-fixed {
       position: fixed;
@@ -225,6 +295,9 @@
         padding: 1rem 2rem;
         font-size: 1.1rem;
       }
+      form.contact-form {
+        padding: 1.5rem 1.8rem;
+      }
     }
   </style>
 </head>
@@ -259,6 +332,22 @@
     <p style="max-width:600px; margin: 2rem auto; font-size:1.15rem; color:#d1d5db; text-align:center;">
       Vuoi un menu moderno, elegante e pronto a farti vendere di più? Lo creo per te in soli 2 giorni lavorativi.
     </p>
+
+    <!-- FORM CONTATTI -->
+    <form class="contact-form" action="#" method="POST" aria-label="Modulo contatti per richiedere informazioni o preventivo">
+      <label for="nome">Nome <span aria-hidden="true" style="color:#fbbf24">*</span></label>
+      <input type="text" id="nome" name="nome" placeholder="Il tuo nome" required aria-required="true" autocomplete="name" />
+
+      <label for="email">Email <span aria-hidden="true" style="color:#fbbf24">*</span></label>
+      <input type="email" id="email" name="email" placeholder="La tua email" required aria-required="true" autocomplete="email" />
+
+      <label for="messaggio">Messaggio <span aria-hidden="true" style="color:#fbbf24">*</span></label>
+      <textarea id="messaggio" name="messaggio" placeholder="Raccontami qualcosa del tuo locale o cosa desideri realizzare" required aria-required="true"></textarea>
+
+      <p class="required-note">* Campi obbligatori</p>
+
+      <button type="submit" aria-label="Invia richiesta">Invia richiesta</button>
+    </form>
 
   </main>
 
