@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Menu Digitale Rustico - Pizzeria Bella Napoli</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Open+Sans:wght@400;700&display=swap');
+  @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Open Sans', sans-serif;
+    background: #f5f0e6;
+    margin: 0;
+    color: #4b3b2b;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .menu-container {
+    max-width: 480px;
+    width: 100%;
+    margin: 32px auto 0;
+    background: #fff8f0;
+    border-radius: 14px;
+    box-shadow: 0 8px 16px rgba(75,59,43,0.15);
+    border: 2px solid #d4b483;
+    overflow: hidden;
+    flex-grow: 1;
+  }
+
+  header {
+    text-align: center;
+    background: #a97449;
+    color: #fff8f0;
+    padding: 20px 0;
+    font-family: 'Amatic SC', cursive;
+  }
+
+  .header-img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-bottom: 5px solid #d4b483;
+    filter: brightness(0.85);
+  }
+
+  h1 {
+    margin: 12px 0 4px 0;
+    font-size: 2.4rem;
+    letter-spacing: 2px;
+  }
+
+  .subtitle {
+    margin: 0 0 12px 0;
+    color: #d4b483;
+    font-weight: 700;
+    font-family: 'Amatic SC', cursive;
+    font-size: 1.3rem;
+  }
+
+  .menu-tabs {
+    display: flex;
+    background: #f0e6d2;
+    box-shadow: inset 0 -3px 6px -3px rgba(169,116,73,0.4);
+  }
+
+  .tab-btn {
+    flex: 1;
+    padding: 14px 0;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    color: #a97449;
+    cursor: pointer;
+    font-weight: 700;
+    font-family: 'Amatic SC', cursive;
+    border-bottom: none;
+    box-shadow: inset 0 -3px 6px -3px transparent;
+    transition:
+      box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+      color 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.25s ease;
+  }
+
+  .tab-btn:hover:not(.active) {
+    color: #6b4c24;
+    box-shadow: inset 0 -4px 7px -3px rgba(169,116,73,0.3);
+    transform: scale(1.05);
+  }
+
+  .tab-btn.active {
+    box-shadow: inset 0 -6px 8px -3px #d4b483;
+    color: #6b4c24;
+    transform: scale(1.1);
+  }
+
+  .menu-section {
+    display: none;
+    padding: 20px 20px 30px 20px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  .menu-section.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 22px;
+    background: #fff2e6;
+    border-radius: 12px;
+    padding: 12px 20px;
+    box-shadow: 0 4px 10px rgba(75,59,43,0.1);
+    transition:
+      box-shadow 0.3s ease,
+      transform 0.25s ease;
+  }
+
+  li:hover {
+    box-shadow: 0 8px 24px rgba(75,59,43,0.25);
+    transform: translateY(-3px);
+  }
+
+  .dish-avatar {
+    flex-shrink: 0;
+    width: 90px;
+    height: 60px;
+    border-radius: 10px;
+    object-fit: cover;
+    margin-right: 18px;
+    border: 2px solid #d4b483;
+    background: #fff8f0;
+    transition: transform 0.3s ease;
+    min-width: 60px;
+  }
+
+  li:hover .dish-avatar {
+    transform: scale(1.05);
+  }
+
+  .dish-info {
+    flex-grow: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .dish-text {
+    flex-grow: 1;
+    min-width: 0;
+    margin-right: 10px; /* circa 1 cm di spazio */
+  }
+
+  .dish-title {
+    font-family: 'Amatic SC', cursive;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #6b4c24;
+    margin-bottom: 4px;
+    overflow-wrap: break-word;
+  }
+
+  .dish-desc {
+    font-size: 0.9rem;
+    color: #8c7b68;
+    opacity: 0.9;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  .dish-price {
+    flex-shrink: 0;
+    width: 70px;
+    text-align: right;
+    font-family: 'Amatic SC', cursive;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: #a97449;
+    margin-left: 15px;
+    transition: color 0.3s ease;
+  }
+
+  .dish-price:hover {
+    color: #6b4c24;
+  }
+
+  footer {
+    background: #a97449;
+    color: #fff8f0;
+    text-align: center;
+    padding: 22px 15px;
+    font-size: 0.85rem;
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  .social-icons {
+    margin-bottom: 12px;
+  }
+
+  .social-icons a {
+    margin: 0 10px;
+    color: #fff8f0;
+    text-decoration: none;
+    font-size: 1.5rem;
+    transition: color 0.3s;
+  }
+
+  .social-icons a:hover {
+    color: #d4b483;
+  }
+
+  @media (max-width: 480px) {
+    .menu-container {
+      margin: 16px 10px 0 10px;
+    }
+    .dish-avatar {
+      width: 70px;
+      height: 50px;
+      margin-right: 12px;
+      min-width: 50px;
+    }
+    .dish-title {
+      font-size: 1.3rem;
+    }
+    .dish-desc {
+      font-size: 0.8rem;
+    }
+    .dish-price {
+      width: 60px;
+      font-size: 1.1rem;
+      margin-left: 10px;
+    }
+    h1 {
+      font-size: 1.8rem;
+    }
+    .subtitle {
+      font-size: 1.1rem;
+    }
+    .tab-btn {
+      font-size: 0.9rem;
+      padding: 12px 0;
+    }
+    li {
+      padding: 10px 15px;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="menu-container">
+    <header>
+      <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80" alt="Ristorante" class="header-img" />
+      <h1>Pizzeria Bella Napoli</h1>
+      <p class="subtitle">Il gusto autentico della tradizione</p>
+    </header>
+
+    <nav class="menu-tabs" role="tablist" aria-label="Categorie menu">
+      <button class="tab-btn active" data-tab="pizze" role="tab" aria-selected="true" aria-controls="pizze" id="tab-pizze">Pizze</button>
+      <button class="tab-btn" data-tab="primi" role="tab" aria-selected="false" aria-controls="primi" id="tab-primi">Primi</button>
+      <button class="tab-btn" data-tab="secondi" role="tab" aria-selected="false" aria-controls="secondi" id="tab-secondi">Secondi</button>
+      <button class="tab-btn" data-tab="contorni" role="tab" aria-selected="false" aria-controls="contorni" id="tab-contorni">Contorni</button>
+      <button class="tab-btn" data-tab="bevande" role="tab" aria-selected="false" aria-controls="bevande" id="tab-bevande">Bevande</button>
+    </nav>
+
+    <!-- Sezioni menu -->
+    <section id="pizze" class="menu-section active" role="tabpanel" aria-labelledby="tab-pizze">
+      <ul>
+        <li>
+          <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=120&q=80" alt="Margherita" class="dish-avatar" />
+          <div class="dish-info">
+            <div class="dish-text">
+              <div class="dish-title">Margherita</div>
+              <div class="dish-desc">Pomodoro, mozzarella, basilico fresco e olio extravergine di oliva</div>
+            </div>
+            <div class="dish-price">€6,00</div>
+          </div>
+        </li>
+        <li>
+          <img src="https://images.unsplash.com/photo-1594002621430-8041a7742d4a?auto=format&fit=crop&w=120&q=80" alt="Diavola" class="dish-avatar" />
+          <div class="dish-info">
+            <div class="dish-text">
+              <div class="dish-title">Diavola</div>
+              <div class="dish-desc">Pomodoro, mozzarella, salame piccante e olive nere</div>
+            </div>
+            <div class="dish-price">€8,50</div>
+          </div>
+        </li>
+        <li>
+          <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0422c?auto=format&fit=crop&w=120&q=80" alt="Capricciosa" class="dish-avatar" />
+          <div class="dish-info">
+            <div class="dish-text">
+              <div class="dish-title">Capricciosa</div>
+              <div class="dish-desc">Pomodoro, mozzarella, funghi, prosciutto cotto, carciofini, olive e uovo sodo</div>
+            </div>
+            <div class="dish-price">€9,00</div>
+          </div>
+        </li>
+        <li>
+          <img src="https://images.unsplash.com/photo-1548365328-9d0a1a3b4a1f?auto=format&fit=crop&w=120&q=80" alt="Quattro Formaggi" class="dish-avatar" />
+          <div class="dish-info">
+            <div class="dish-text">
+              <div class="dish-title">Quattro Formaggi</div>
+              <div class="dish-desc">Mozzarella, gorgonzola, parmigiano e fontina</div>
+            </div>
+            <div class="dish-price">€7,50</div>
+          </div>
+        </li>
+        <li>
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=120&q=80" alt="Vegetariana" class="dish-avatar" />
+          <div class="dish-info">
+            <div class="dish-text">
+              <div class="dish-title">Vegetariana</div>
+              <div class="dish-desc">Pomodoro, mozzarella e verdure grigliate di stagione</div>
+            </div>
+            <div class="dish-price">€8,00</div>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Altre sezioni (primi, secondi, contorni, bevande) da completare come sopra -->
+
+  </div>
+
+  <footer>
+    <div class="social-icons" aria-label="Link ai social media">
+      <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+    <div>
+      <small><em>Allergeni? Chiedi al personale.</em></small>
+    </div>
+    <div style="margin-top:10px; font-size:0.75rem; color:#d4b483;">
+      &copy; 2025 Pizzeria Bella Napoli
+    </div>
+  </footer>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab-btn');
+    const sections = document.querySelectorAll('.menu-section');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        sections.forEach(s => {
+          s.classList.remove('active');
+        });
+
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+
+        const target = document.getElementById(tab.dataset.tab);
+        target.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
+

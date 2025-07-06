@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Menu Digitale - Variante 2</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: #f0f2f5;
+    margin: 0;
+    color: #222;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  .menu-container {
+    max-width: 480px;
+    margin: 32px auto 100px; /* spazio per footer */
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    overflow: hidden;
+    flex-grow: 1;
+  }
+  header {
+    text-align: center;
+    background: #3a3f51;
+    color: #fff;
+    padding-bottom: 12px;
+  }
+  .header-img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    object-position: center;
+    border-bottom: 5px solid #6c63ff;
+  }
+  h1 {
+    margin: 12px 0 4px 0;
+    font-size: 2em;
+    letter-spacing: 1px;
+  }
+  .subtitle {
+    margin: 0 0 8px 0;
+    color: #6c63ff;
+    font-weight: 700;
+  }
+  /* Pulsanti con larghezza uguale e font più piccolo */
+  .menu-tabs {
+    display: flex;
+    justify-content: space-between;
+    background: #fff;
+    border-bottom: 2px solid #6c63ff;
+    padding: 0 10px;
+  }
+  .tab-btn {
+    flex: 1 1 0;
+    margin: 10px 6px;
+    padding: 8px 0;
+    background: #e7e6ff;
+    border: none;
+    border-radius: 6px 6px 0 0;
+    font-size: 0.85rem; /* font più piccolo */
+    color: #4a4a6a;
+    cursor: pointer;
+    font-weight: 700;
+    box-shadow: 0 3px 6px rgba(108,99,255,0.3);
+    transition: background 0.3s ease, color 0.3s ease;
+    outline: none;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .tab-btn.active {
+    background: #6c63ff;
+    color: #fff;
+    box-shadow: 0 6px 15px rgba(108,99,255,0.6);
+    transform: translateY(-3px);
+  }
+  .tab-btn:hover:not(.active) {
+    background: #d4d3ff;
+    color: #6c63ff;
+  }
+  /* Sezioni menu */
+  .menu-section {
+    display: none;
+    padding: 20px 20px 30px 20px;
+    animation: fadeIn 0.4s;
+  }
+  .menu-section.active {
+    display: block;
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 22px;
+    background: #f9f9ff;
+    border-radius: 14px;
+    padding: 12px 14px;
+    box-shadow: 0 2px 8px rgba(108,99,255,0.1);
+    transition: box-shadow 0.2s;
+  }
+  li:hover {
+    box-shadow: 0 6px 20px rgba(108,99,255,0.2);
+  }
+  .dish-avatar {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 18px;
+    border: 2px solid #6c63ff;
+    background: #fff;
+  }
+  .dish-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .dish-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 700;
+    font-size: 1.15em;
+    margin-bottom: 3px;
+  }
+  .dish-price {
+    color: #6c63ff;
+    font-weight: 700;
+    font-size: 1.05em;
+  }
+  .dish-desc {
+    font-size: 1em;
+    color: #555;
+    margin-top: 3px;
+    opacity: 0.9;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px);}
+    to { opacity: 1; transform: translateY(0);}
+  }
+  /* Footer */
+  footer {
+    background: #f0f2f5;
+    padding: 16px 0 8px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    max-width: 480px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-top: 2px solid #6c63ff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: #4a4a6a;
+  }
+  .footer-icons {
+    display: flex;
+    gap: 36px;
+    margin-bottom: 4px;
+  }
+  footer a {
+    color: #4a4a6a;
+    text-decoration: none;
+    font-size: 26px;
+    transition: color 0.3s;
+  }
+  footer a:hover {
+    color: #6c63ff;
+  }
+  footer a svg {
+    vertical-align: middle;
+    fill: currentColor;
+  }
+
+  /* Responsive testi e pulsanti */
+  @media screen and (max-width: 480px) {
+    .dish-title {
+      font-size: 1rem;
+    }
+    .dish-price {
+      font-size: 0.9rem;
+    }
+    .dish-desc {
+      font-size: 0.85rem;
+    }
+    h1 {
+      font-size: 1.6rem;
+    }
+    .subtitle {
+      font-size: 0.9rem;
+    }
+    .tab-btn {
+      font-size: 0.75rem;
+      margin: 8px 4px;
+      padding: 6px 0;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="menu-container">
+    <header>
+      <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80" alt="Ristorante" class="header-img" />
+      <h1>Pizzeria Ristorante Bella Napoli</h1>
+      <p class="subtitle">Scopri il nostro menu</p>
+    </header>
+
+    <nav class="menu-tabs">
+      <button class="tab-btn active" data-tab="pizze">Pizze</button>
+      <button class="tab-btn" data-tab="primi">Primi</button>
+      <button class="tab-btn" data-tab="secondi">Secondi</button>
+      <button class="tab-btn" data-tab="contorni">Contorni</button>
+      <button class="tab-btn" data-tab="bevande">Bevande</button>
+    </nav>
+
+    <section id="pizze" class="menu-section active">
+      <ul>
+        <li>
+          <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=64&q=80" alt="Margherita" class="dish-avatar" />
+          <div class="dish-info">
+            <div class="dish-title"><span>Margherita</span><span class="dish-price">€6,00</span></div>
+            <div class="dish-desc">Pomodoro, mozzarella, basilico</div>
+          </div>
+        </li>
+        <li>
+          <img src="https://images.unsplash.com/photo-1594002621430-8041a7742d4a?auto=format&fit=crop&w=64&q=80" alt="Diavola" class="dish-avatar" />
+          <div class="dish-info">
+            <div class="dish-title"><span>Diavola</span><span class="dish-price">€8,50</span></div>
+            <div class="dish-desc">Pomodoro, mozzarella, salame piccante, olive</div>
+          </div>
+        </li>
+        <li>
+          <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0422c?auto=format&fit=crop&w=64&q=80" alt="Capricciosa" class="dish-avatar" />
+          <div class="dish-info">
+            <div class="dish-title"><span>Capricciosa</span><span class="dish-price">€9,00</span></div>
+            <div class="dish-desc">Pomodoro, mozzarella, funghi, prosciutto cotto, carciofini, olive, uovo</div>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section id="primi" class="menu-section">
+      <ul>
+        <li>
+          <img src="https://images.unsplash.com/photo-1523987355523-c7b5b0723c6d?auto=format&fit=crop&w=64&q=80" alt="Spaghetti Carbonara" class="dish-avatar" />
+          <div class="dish-info">
+            <div class="dish-title"><span>Spaghetti Carbonara</span><span class="dish-price">€9,00</span></div>
+            <div class="dish-desc">Guanciale, uova, pecorino romano, pepe nero</div>
+          </div>
+        </li>
+        <li>
+          <img src="https://images.unsplash.com/photo-1621992160650-f823f6d72f9d?auto=format&fit=crop&w=64&q=80" alt="Lasagne al Forno" class="dish-avatar" />
+          <div class="dish-info">
+            <div class="dish-title"><span>Lasagne al Forno</span><span class="dish-price">€10,00</span></div>
+            <div class="dish-desc">Pasta fresca, ragù di carne, besciamella, parmigiano</div>
+          </div>
+        </li>
+        <li>
+          <img src="https://images.unsplash.com/photo-1605330384814-1e0f0d2b6b5d?auto=format&fit=crop&w=64&q=80" alt="Risotto ai Funghi Porcini" class="dish-avatar" />
+          <div class="dish-info">
+            <div class="dish-title"><span>Risotto ai Funghi Porcini</span><span class="dish-price">€11,00</span></div>
+            <div class="dish-desc">Riso Carnaroli, funghi porcini, brodo vegetale, burro, parmigiano</div>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section id="secondi" class="menu-section">
+      <ul>
+        <li>
+          <img src="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=64&q=80" alt="Cotoletta alla Milanese" class="dish-avatar" />
+          <div class="dish-info">
+            <div class="dish-title"><span>Cotoletta alla Milanese</span><span class="dish-price">€12,00</span></div>
+            <div class="dish-desc">Cotoletta di vitello impanata e fritta, servita con limone</div>
+          </div>
+        </li>
+        <li>
+          <img src="https://images.unsplash.com/photo-1529699210087-c37021303102?auto=format&fit=crop&w=64&q=80" alt="Tagliata di Manzo" class="dish-avatar" />
+          <div class="dish-info">
+            <div class="dish-title"><span>Tagliata di Manzo con Rucola e Grana</span><span class="dish-price">€18,00</span></div>
+            <div class="dish-desc">Fettine di manzo cotte al sangue, rucola, scaglie di grana, aceto balsamico</div>
+          </div>
+        </li>
+        <li>
+          <img src="https://images.unsplash.com/photo-1540189549336-e6191b66236b?auto=format&fit=crop&w=64&q=80" alt="Grigliata Mista di Carne" class="dish-avatar" />
+          <div class="dish-info">
+            <div class="dish-title"><span>Grigliata Mista di Carne</span><span class="dish-price">€16,00</span></div>
+            <div class="dish-desc">Salsiccia, costine, pollo, manzo, verdure grigliate</div>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section id="contorni" class="menu-section">
+      <ul>
+        <li>
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=64&q=80" alt="Patatine Fritte" class="dish-avatar" />
+          <div class="dish-info">
+            <div class="dish-title"><span>Patatine Fritte</span><span class="dish-price">€4,00</span></div>
+            <div class="dish-desc">Patate fresche tagliate e fritte, salate al punto giusto</div>
+          </div>
+        </li>
+        <li>
+          <img src="https://images.unsplash.com/photo-1512621776951-a5739b69b552?auto=format&fit=crop&w=64&q=80" alt="Insalata Mista" class="dish-avatar" />
+          <div class="dish-info">
+            <div class="dish-title"><span>Insalata Mista</span><span class="dish-price">€4,50</span></div>
+            <div class="dish-desc">Lattuga, pomodorini, carote, mais, condimento a parte</div>
+          </div>
+        </li>
+        <li>
+          <img src="https://images.unsplash.com/photo-1596706788574-8d96e5720078?auto=format&fit=crop&w=64&q=80" alt="Verdure Grigliate" class="dish-avatar" />
+          <div class="dish-info">
+            <div class="dish-title"><span>Verdure Grigliate</span><span class="dish-price">€5,00</span></div>
+            <div class="dish-desc">Melanzane, zucchine, peperoni grigliati con olio e sale</div>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section id="bevande" class="menu-section">
+      <ul>
+        <li>
+          <img src="https://images.unsplash.com/photo-1554527787-8d2b70b5b9c1?auto=format&fit=crop&w=64&q=80" alt="Acqua Naturale" class="dish-avatar" />
+          <div class="dish-info">
+            <div class="dish-title"><span>Acqua Naturale 1L</span><span class="dish-price">€2,00</span></div>
+            <div class="dish-desc">Bottiglia di acqua minerale naturale</div>
+          </div>
+        </li>
+        <li>
+          <img src="https://images.unsplash.com/photo-1582806296180-87e3f890c28e?auto=format&fit=crop&w=64&q=80" alt="Acqua Frizzante" class="dish-avatar" />
+          <div class="dish-info">
+            <div class="dish-title"><span>Acqua Frizzante 1L</span><span class="dish-price">€2,00</span></div>
+            <div class="dish-desc">Bottiglia di acqua minerale frizzante</div>
+          </div>
+        </li>
+        <li>
+          <img src="https://images.unsplash.com/photo-1586528116515-5e6a3c6c0b0a?auto=format&fit=crop&w=64&q=80" alt="Coca Cola" class="dish-avatar" />
+          <div class="dish-info">
+            <div class="dish-title"><span>Coca Cola 33cl</span><span class="dish-price">€3,00</span></div>
+            <div class="dish-desc">Lattina 33cl</div>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </div>
+
+  <footer>
+    <div class="footer-icons">
+      <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+        <svg width="24" height="24" viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.5 9.87v-6.98h-2.1v-2.9h2.1v-2.2c0-2.07 1.23-3.22 3.12-3.22.9 0 1.84.16 1.84.16v2.03h-1.04c-1.03 0-1.35.64-1.35 1.3v1.95h2.3l-.37 2.9h-1.93v6.98A10 10 0 0 0 22 12z"/></svg>
+      </a>
+      <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+        <svg width="24" height="24" viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 2A3.75 3.75 0 0 0 4 7.75v8.5A3.75 3.75 0 0 0 7.75 20h8.5A3.75 3.75 0 0 0 20 16.25v-8.5A3.75 3.75 0 0 0 16.25 4h-8.5zm8.25 2.5a1 1 0 1 1 0 2 1 1 0 0 1 0-2zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>
+      </a>
+      <a href="tel:+390123456789" aria-label="Telefono">
+        <svg width="24" height="24" viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.11-.21c1.21.49 2.53.76 3.88.76a1 1 0 0 1 1 1v3.5a1 1 0 0 1-1 1A17 17 0 0 1 3 6a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.35.27 2.67.76 3.88a1 1 0 0 1-.21 1.11z"/></svg>
+      </a>
+    </div>
+    <div>© 2025 Pizzeria Ristorante Bella Napoli</div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.menu-section').forEach(s => s.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.tab).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

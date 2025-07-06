@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Menu Urban Chic</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+  body {
+    margin: 0; background: #121212; font-family: 'Roboto', sans-serif; color: #eee;
+    display: flex; flex-direction: column; min-height: 100vh;
+  }
+  .menu-container {
+    max-width: 480px; margin: 40px auto; background: #1f1f1f;
+    border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    overflow: hidden; padding-bottom: 60px;
+  }
+  header {
+    display: flex;
+    align-items: center;
+    padding: 20px 20px 20px 20px;
+    border-bottom: 2px solid #333;
+  }
+  .logo-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    background: #f0a500;
+    margin-right: 15px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: #121212;
+    user-select: none;
+  }
+  header h1 {
+    font-size: 2.4rem; margin: 0; font-weight: 700; color: #f0a500;
+    text-transform: uppercase; letter-spacing: 2px;
+  }
+  header p {
+    font-weight: 600; font-size: 1rem; color: #f0a500cc;
+    margin: 4px 0 0 0;
+  }
+  .menu-tabs {
+    display: flex; background: #222; border-bottom: 2px solid #333;
+    gap: 8px; /* spazio tra i pulsanti */
+    padding: 0 10px;
+  }
+  .tab-btn {
+    flex: none;
+    padding: 10px 14px;
+    background: none;
+    border: none;
+    font-size: 0.9rem;
+    color: #888;
+    font-weight: 700;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    transition: color 0.3s, border-bottom 0.3s;
+    border-radius: 6px 6px 0 0;
+    min-width: 80px;
+    text-align: center;
+  }
+  .tab-btn.active {
+    color: #f0a500;
+    border-bottom: 3px solid #f0a500;
+    background: #2a2a2a;
+  }
+  .tab-btn:hover:not(.active) {
+    color: #f0a500;
+  }
+  .menu-section {
+    display: none; padding: 20px 20px 40px; animation: fadeInUp 0.4s ease forwards;
+  }
+  .menu-section.active {
+    display: block;
+  }
+  @keyframes fadeInUp {
+    from {opacity: 0; transform: translateY(15px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+  ul {
+    list-style: none; margin: 0; padding: 0;
+  }
+  li {
+    display: flex; align-items: center; background: #2a2a2a;
+    border-radius: 12px; margin-bottom: 18px; padding: 15px 20px;
+    box-shadow: 0 6px 15px rgba(240,165,0,0.15);
+    transition: box-shadow 0.3s ease;
+  }
+  li:hover {
+    box-shadow: 0 8px 25px rgba(240,165,0,0.4);
+  }
+  .dish-avatar {
+    width: 70px; height: 70px; border-radius: 14px; object-fit: cover;
+    margin-right: 18px; flex-shrink: 0; border: 2px solid #f0a500;
+    transition: transform 0.3s ease;
+  }
+  li:hover .dish-avatar {
+    transform: scale(1.1);
+  }
+  .dish-info {
+    flex-grow: 1; min-width: 0; display: flex; align-items: center; justify-content: space-between;
+  }
+  .dish-text {
+    flex-grow: 1; min-width: 0; margin-right: 12px;
+  }
+  .dish-title {
+    font-weight: 700; font-size: 1.5rem; color: #f0a500; margin-bottom: 6px;
+    overflow-wrap: break-word;
+  }
+  .dish-desc {
+    font-size: 0.9rem; color: #bbb; overflow-wrap: break-word;
+  }
+  .dish-price {
+    flex-shrink: 0; width: 70px; text-align: right; font-weight: 700;
+    font-size: 1.3rem; color: #f0a500; margin-left: 15px; user-select: none;
+  }
+  footer {
+    background: #222; color: #f0a500cc; text-align: center; padding: 20px 15px;
+    font-size: 0.85rem;
+  }
+  .social-icons a {
+    margin: 0 12px; color: #f0a500cc; font-size: 1.5rem; transition: color 0.3s;
+  }
+  .social-icons a:hover {
+    color: #f0a500;
+  }
+  @media (max-width: 480px) {
+    .menu-container { margin: 16px 10px 0 10px; }
+    .dish-avatar { width: 60px; height: 60px; margin-right: 12px; }
+    .dish-title { font-size: 1.3rem; }
+    .dish-desc { font-size: 0.85rem; }
+    .dish-price { width: 60px; font-size: 1.1rem; margin-left: 10px; }
+    h1 { font-size: 1.8rem; }
+    .tab-btn { font-size: 0.8rem; padding: 8px 10px; min-width: 70px; }
+    li { padding: 10px 15px; }
+  }
+</style>
+</head>
+<body>
+  <div class="menu-container">
+    <header>
+      <div class="logo-avatar" aria-label="Logo Locale">UB</div>
+      <div>
+        <h1>Urban Bar</h1>
+        <p>Bevande e cocktail selezionati</p>
+      </div>
+    </header>
+
+    <nav class="menu-tabs" role="tablist" aria-label="Categorie menu">
+      <button class="tab-btn active" data-tab="birre" role="tab" aria-selected="true" aria-controls="birre" id="tab-birre">Birre</button>
+      <button class="tab-btn" data-tab="cocktail" role="tab" aria-selected="false" aria-controls="cocktail" id="tab-cocktail">Cocktail</button>
+      <button class="tab-btn" data-tab="analcolici" role="tab" aria-selected="false" aria-controls="analcolici" id="tab-analcolici">Analcolici</button>
+      <button class="tab-btn" data-tab="calde" role="tab" aria-selected="false" aria-controls="calde" id="tab-calde">Bevande Calde</button>
+    </nav>
+
+    <section id="birre" class="menu-section active" role="tabpanel" aria-labelledby="tab-birre">
+      <ul>
+        <li>
+          <img src="https://images.unsplash.com/photo-1563371356-1c0f1b13e4c0?auto=format&fit=crop&w=80&q=80" alt="Birra Bionda" class="dish-avatar" />
+          <div class="dish-info">
+            <div class="dish-text">
+              <div class="dish-title">Birra Bionda</div>
+              <div class="dish-desc">Leggera e fruttata, 5% vol.</div>
+            </div>
+            <div class="dish-price">€4,50</div>
+          </div>
+        </li>
+        <li>
+          <img src="https://images.unsplash.com/photo-1572635196237-4a1f1e1a0e2b?auto=format&fit=crop&w=80&q=80" alt="Birra Rossa" class="dish-avatar" />
+          <div class="dish-info">
+            <div class="dish-text">
+              <div class="dish-title">Birra Rossa</div>
+              <div class="dish-desc">Corposa con note caramellate, 6.5% vol.</div>
+            </div>
+            <div class="dish-price">€5,00</div>
+          </div>
+        </li>
+        <li>
+          <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=80&q=80" alt="Birra IPA" class="dish-avatar" />
+          <div class="dish-info">
+            <div class="dish-text">
+              <div class="dish-title">Birra IPA</div>
+              <div class="dish-desc">Amara e aromatica, 7% vol.</div>
+            </div>
+            <div class="dish-price">€5,50</div>
+          </div>
+        </li>
+        <li>
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=80&q=80" alt="Birra Weiss" class="dish-avatar" />
+          <div class="dish-info">
+            <div class="dish-text">
+              <div class="dish-title">Birra Weiss</div>
+              <div class="dish-desc">Fruttata e speziata, 5.5% vol.</div>
+            </div>
+            <div class="dish-price">€5,00</div>
+          </div>
+        </li>
+        <li>
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=80&q=80" alt="Birra Stout" class="dish-avatar" />
+          <div class="dish-info">
+            <div class="dish-text">
+              <div class="dish-title">Birra Stout</div>
+              <div class="dish-desc">Corposa e tostatura intensa, 6% vol.</div>
+            </div>
+            <div class="dish-price">€5,50</div>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section id="cocktail" class="menu-section" role="tabpanel" aria-labelledby="tab-cocktail">
+      <ul>
+        <li>
+          <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=80&q=80" alt="Mojito" class="dish-avatar" />
+          <div class="dish-info">
+            <div class="dish-text">
+              <div class="dish-title">Mojito</div>
+              <div class="dish-desc">Rum, lime, menta fresca, zucchero e soda</div>
+            </div>
+            <div class="dish-price">€7,50</div>
+          </div>
+        </li>
+        <li>
+          <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?auto=format&fit=crop&w=80&q=80" alt="Negroni" class="dish-avatar" />
+          <div class="dish-info">
+            <div class="dish-text">
+              <div class="dish-title">Negroni</div>
+              <div class="dish-desc">Gin, vermouth rosso, Campari</div>
+            </div>
+            <div class="dish-price">€8,00</div>
+          </div>
+        </li>
+        <li>
+          <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=80&q=80" alt="Spritz" class="dish-avatar" />
+          <div class="dish-info">
+            <div class="dish-text">
+              <div class="dish-title">Spritz</div>
+              <div class="dish-desc">Aperol, prosecco, soda</div>
+            </div>
+            <div class="dish-price">€6,50</div>
+          </div>
+        </li>
+        <li>
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=80&q=80" alt="Caipirinha" class="dish-avatar" />
+          <div class="dish-info">
+            <div class="dish-text">
+              <div class="dish-title">Caipirinha</div>
+              <div class="dish-desc">Cachaça, lime, zucchero</div>
+            </div>
+            <div class="dish-price">€7,00</div>
+          </div>
+        </li>
+        <li>
+          <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=80&q=80" alt="Cosmopolitan" class="dish-avatar" />
+          <div class="dish-info">
+            <div class="dish-text">
+              <div class="dish-title">Cosmopolitan</div>
+              <div class="dish-desc">Vodka, triple sec, cranberry, lime</div>
+            </div>
+            <div class="dish-price">€8,50</div>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section id="analcolici" class="menu-section" role="tabpanel" aria-labelledby="tab-analcolici">
+      <ul>
+        <li>
+          <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=80&q=80" alt="Acqua Naturale" class="dish-avatar" />
+          <div class="dish-info">
+            <div class="dish-text">
+              <div class="dish-title">Acqua Naturale</div>
+              <div class="dish-desc">Bottiglia 0,5L</div>
+            </div>
+            <div class="dish-price">€2,00</div>
+          </div>
+        </li>
+        <li>
+          <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=80&q=80" alt="Bibita Gassata" class="dish-avatar" />
+          <div class="dish-info">
+            <div class="dish-text">
+              <div class="dish-title">Bibita Gassata</div>
+              <div class="dish-desc">Coca Cola, Fanta, Sprite</div>
+            </div>
+            <div class="dish-price">€3,00</div>
+          </div>
+        </li>
+        <li>
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=80&q=80" alt="Succo d'Arancia" class="dish-avatar" />
+          <div class="dish-info">
+            <div class="dish-text">
+              <div class="dish-title">Succo d'Arancia</div>
+              <div class="dish-desc">Spremuta fresca</div>
+            </div>
+            <div class="dish-price">€3,50</div>
+          </div>
+        </li>
+        <li>
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=80&q=80" alt="Limonata" class="dish-avatar" />
+          <div class="dish-info">
+            <div class="dish-text">
+              <div class="dish-title">Limonata</div>
+              <div class="dish-desc">Fresca e dissetante</div>
+            </div>
+            <div class="dish-price">€3,00</div>
+          </div>
+        </li>
+        <li>
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=80&q=80" alt="Tè Freddo" class="dish-avatar" />
+          <div class="dish-info">
+            <div class="dish-text">
+              <div class="dish-title">Tè Freddo</div>
+              <div class="dish-desc">Limone o pesca</div>
+            </div>
+            <div class="dish-price">€3,00</div>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section id="calde" class="menu-section" role="tabpanel" aria-labelledby="tab-calde">
+      <ul>
+        <li>
+          <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=80&q=80" alt="Caffè Espresso" class="dish-avatar" />
+          <div class="dish-info">
+            <div class="dish-text">
+              <div class="dish-title">Caffè Espresso</div>
+              <div class="dish-desc">Classico italiano</div>
+            </div>
+            <div class="dish-price">€1,50</div>
+          </div>
+        </li>
+        <li>
+          <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=80&q=80" alt="Tè Verde" class="dish-avatar" />
+          <div class="dish-info">
+            <div class="dish-text">
+              <div class="dish-title">Tè Verde</div>
+              <div class="dish-desc">Infuso naturale</div>
+            </div>
+            <div class="dish-price">€2,50</div>
+          </div>
+        </li>
+        <li>
+          <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=80&q=80" alt="Cioccolata Calda" class="dish-avatar" />
+          <div class="dish-info">
+            <div class="dish-text">
+              <div class="dish-title">Cioccolata Calda</div>
+              <div class="dish-desc">Densa e cremosa</div>
+            </div>
+            <div class="dish-price">€3,00</div>
+          </div>
+        </li>
+        <li>
+          <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=80&q=80" alt="Latte Macchiato" class="dish-avatar" />
+          <div class="dish-info">
+            <div class="dish-text">
+              <div class="dish-title">Latte Macchiato</div>
+              <div class="dish-desc">Con schiuma di latte</div>
+            </div>
+            <div class="dish-price">€2,80</div>
+          </div>
+        </li>
+        <li>
+          <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=80&q=80" alt="Cappuccino" class="dish-avatar" />
+          <div class="dish-info">
+            <div class="dish-text">
+              <div class="dish-title">Cappuccino</div>
+              <div class="dish-desc">Espresso con latte montato</div>
+            </div>
+            <div class="dish-price">€2,80</div>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+  </div>
+
+  <footer>
+    <div class="social-icons" aria-label="Link ai social media">
+      <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+    <div>
+      <small><em>Allergeni? Chiedi al personale.</em></small>
+    </div>
+    <div style="margin-top:10px; font-size:0.75rem; color:#f0a500cc;">
+      &copy; 2025 Urban Bar
+    </div>
+  </footer>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab-btn');
+    const sections = document.querySelectorAll('.menu-section');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        sections.forEach(s => {
+          s.classList.remove('active');
+        });
+
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+
+        document.getElementById(tab.dataset.tab).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
