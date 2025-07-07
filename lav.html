@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menu Trattoria</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            salvia: '#9CAF88',
+            carta: '#FFF9F0'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body class="bg-carta text-gray-800">
+
+  <!-- HEADER -->
+  <header class="bg-salvia text-white py-5 shadow-md">
+    <div class="container mx-auto px-4 flex items-center justify-between">
+      <div class="flex items-center space-x-4">
+        <img src="https://i.postimg.cc/Y0H2ghKN/logo.png" class="h-10" alt="Logo">
+        <h1 class="text-xl sm:text-2xl font-bold">Trattoria Da Fabio</h1>
+      </div>
+      <p class="hidden sm:block italic text-sm">Sapori autentici italiani</p>
+    </div>
+  </header>
+
+  <!-- MENU MOBILE IN BASSO -->
+  <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-300 z-50 shadow-md sm:hidden flex justify-around text-salvia text-sm font-semibold">
+    <button onclick="showCategory('antipasti')" class="py-3 flex-1 text-center">Antipasti</button>
+    <button onclick="showCategory('primi')" class="py-3 flex-1 text-center">Primi</button>
+    <button onclick="showCategory('secondi')" class="py-3 flex-1 text-center">Secondi</button>
+    <button onclick="showCategory('pizze')" class="py-3 flex-1 text-center">Pizze</button>
+    <button onclick="showCategory('dolci')" class="py-3 flex-1 text-center">Dolci</button>
+  </nav>
+
+  <!-- MENU DESKTOP IN ALTO -->
+  <nav class="hidden sm:flex bg-white shadow-sm sticky top-0 z-40 py-3 justify-center gap-4 border-b border-gray-300">
+    <button onclick="showCategory('antipasti')" class="tab-btn text-salvia font-semibold hover:underline">Antipasti</button>
+    <button onclick="showCategory('primi')" class="tab-btn text-salvia font-semibold hover:underline">Primi</button>
+    <button onclick="showCategory('secondi')" class="tab-btn text-salvia font-semibold hover:underline">Secondi</button>
+    <button onclick="showCategory('pizze')" class="tab-btn text-salvia font-semibold hover:underline">Pizze</button>
+    <button onclick="showCategory('dolci')" class="tab-btn text-salvia font-semibold hover:underline">Dolci</button>
+  </nav>
+
+  <!-- CONTENUTO -->
+  <main class="container mx-auto px-4 py-6 pb-28 sm:pb-8 text-base leading-relaxed">
+
+    <!-- Template categoria (solo una per esempio, le altre identiche) -->
+    <section id="antipasti" class="category">
+      <h2 class="text-2xl font-bold text-salvia mb-4 text-center">Antipasti</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="bg-white rounded-lg shadow p-4">
+          <img src="https://i.postimg.cc/g0N40j3B/bruschetta.jpg" class="rounded mb-2 w-full h-40 object-cover" alt="Bruschetta">
+          <h3 class="font-bold text-lg">Bruschetta <span class="float-right">€5</span></h3>
+          <p class="text-sm text-gray-600">Pane croccante con pomodoro fresco e basilico.</p>
+        </div>
+        <div class="bg-white rounded-lg shadow p-4">
+          <img src="https://i.postimg.cc/pXV8fn9H/caprese.jpg" class="rounded mb-2 w-full h-40 object-cover" alt="Caprese">
+          <h3 class="font-bold text-lg">Caprese <span class="float-right">€6</span></h3>
+          <p class="text-sm text-gray-600">Mozzarella, pomodoro e basilico.</p>
+        </div>
+        <div class="bg-white rounded-lg shadow p-4">
+          <img src="https://i.postimg.cc/jdMSFMMH/salumi.jpg" class="rounded mb-2 w-full h-40 object-cover" alt="Salumi">
+          <h3 class="font-bold text-lg">Affettati misti <span class="float-right">€8</span></h3>
+          <p class="text-sm text-gray-600">Selezione di salumi toscani.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Le altre categorie vanno qui con lo stesso schema (primi, secondi, pizze, dolci)... -->
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-salvia text-white py-6 mt-8 text-sm">
+    <div class="container mx-auto px-4 text-center sm:text-left">
+      <div class="sm:flex sm:justify-between sm:items-center">
+        <div>
+          <p class="font-semibold">Trattoria Da Fabio</p>
+          <p>Via Roma 123, Firenze – Tel: +39 055 1234567</p>
+        </div>
+        <div class="flex justify-center gap-4 mt-4 sm:mt-0">
+          <a href="#"><img src="https://img.icons8.com/ios-filled/24/facebook--v1.png" alt="Facebook"></a>
+          <a href="#"><img src="https://img.icons8.com/ios-filled/24/instagram-new.png" alt="Instagram"></a>
+          <a href="#"><img src="https://img.icons8.com/ios-filled/24/whatsapp.png" alt="WhatsApp"></a>
+        </div>
+      </div>
+      <p class="mt-4 text-xs italic text-gray-200">
+        ⚠️ Alcuni piatti possono contenere allergeni (glutine, lattosio, frutta a guscio). Chiedi al personale per maggiori informazioni.
+      </p>
+    </div>
+  </footer>
+
+  <!-- JS per categorie -->
+  <script>
+    function showCategory(cat) {
+      document.querySelectorAll('.category').forEach(el => el.classList.add('hidden'));
+      document.getElementById(cat).classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Mostra la prima categoria all'avvio
+    document.addEventListener('DOMContentLoaded', () => {
+      showCategory('antipasti');
+    });
+  </script>
+
+</body>
+</html>
