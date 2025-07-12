@@ -286,7 +286,7 @@
 
         <label for="delivery">Modalità di consegna</label>
         <select id="delivery" onchange="toggleAddressField()">
-          <option value="ritiro">Ritiro in fattoria</option>
+          <option value="ritiro">Ritiro a mano</option>
           <option value="domicilio">Consegna a domicilio</option>
         </select>
         <div id="address-group">
@@ -356,12 +356,11 @@
       if (delivery === 'domicilio') messaggio += `• Indirizzo: *${indirizzo}*\n`;
       if (note) messaggio += `• Note: _${note}_\n`;
 
-      const url = `https://wa.me/393440301412?text=${encodeURIComponent(messaggio)}`;
+      const url = `https://wa.me/393389500477?text=${encodeURIComponent(messaggio)}`;
       window.open(url, '_blank');
     });
   </script>
 </body>
 </html>
-
 
 
