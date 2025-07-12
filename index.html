@@ -42,18 +42,15 @@
     .steps {
       display: flex;
       justify-content: space-between;
-      gap: 1rem;
       background: rgba(255, 255, 255, 0.3);
       padding: 1rem;
       border-radius: 12px;
       margin-bottom: 2rem;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
     }
 
     .step {
       flex: 1;
-      min-width: 80px;
-      max-width: 120px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -77,7 +74,7 @@
       50% { transform: translateY(-6px); }
     }
 
-    @media (max-width: 500px) {
+    @media (max-width: 600px) {
       .step img {
         width: 40px;
         height: 40px;
@@ -186,10 +183,11 @@
       background: #86b049;
       color: white;
       border: none;
-      padding: 0.8rem;
+      padding: 1rem;
       border-radius: 6px;
       font-size: 1rem;
       cursor: pointer;
+      width: 100%;
     }
     .modal-content button[type="submit"]:hover {
       background: #6f9638;
@@ -286,20 +284,24 @@
     function updateDisplay(val) {
       document.getElementById("qtyDisplay").textContent = val;
     }
+
     function openModal() {
       const qty = document.getElementById("eggQuantity").value;
       document.getElementById("quantitySlider").value = qty;
       document.getElementById("qtyDisplayModal").textContent = qty;
       document.getElementById("orderModal").style.display = "flex";
     }
+
     function syncQuantity(val) {
       document.getElementById("qtyDisplayModal").textContent = val;
     }
+
     function toggleAddressField() {
       const delivery = document.getElementById('delivery').value;
       const group = document.getElementById('address-group');
       group.style.display = delivery === 'domicilio' ? 'block' : 'none';
     }
+
     document.getElementById('orderForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const nome = document.getElementById('name').value;
@@ -321,3 +323,4 @@
   </script>
 </body>
 </html>
+
