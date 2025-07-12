@@ -224,8 +224,8 @@
 </head>
 <body>
   <div class="overlay">
-    <h1>Uova Fresche dalla Fattoria</h1>
-    <p>Galline libere, alimentazione naturale. Uova genuine direttamente dal produttore.</p>
+    <h1>La casa delle galline - uova fresche</h1>
+    <p>Uova genuine da galline libere, nutrite in modo naturale e allevate in 4.000 mq di verde recintato, direttamente dal produttore.</p>
 
     <div class="steps">
       <div class="step">
@@ -265,7 +265,7 @@
       <button class="close-btn" onclick="document.getElementById('orderModal').style.display='none'">
         &times;
       </button>
-      <h2>Modulo d'Ordine</h2>
+      <h2>Modulo d'ordine</h2>
       <form id="orderForm">
         <label for="name">Il tuo nome</label>
         <input type="text" id="name" required />
@@ -348,10 +348,10 @@
       const indirizzo = document.getElementById('address').value.trim();
       const note = document.getElementById('note').value.trim();
 
-      let messaggio = `*ORDINE UOVA DA FATTORIA*\n\n`;
+      let messaggio = `*HAI UN NUOVO ORDINE 🎉*\n\n`;
       messaggio += `• Nome: *${nome}*\n`;
-      messaggio += `• Quantità: *${qty} uova*\n`;
-      messaggio += `• Totale: *€ ${total}*\n`;
+      messaggio += `• Quantità: *${qty} uova*\n\n`;
+      messaggio += `• Totale: *€ ${total}*\n\n`;
       messaggio += `• Consegna: *${delivery === 'domicilio' ? 'A domicilio' : 'Ritiro a mano'}*\n`;
       if (delivery === 'domicilio') messaggio += `• Indirizzo: *${indirizzo}*\n`;
       if (note) messaggio += `• Note: _${note}_\n`;
@@ -362,5 +362,6 @@
   </script>
 </body>
 </html>
+
 
 
