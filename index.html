@@ -186,12 +186,10 @@
       background: #86b049;
       color: white;
       border: none;
-      width: 100%;
       padding: 0.8rem;
       border-radius: 6px;
       font-size: 1rem;
       cursor: pointer;
-      position: inherit;
     }
     .modal-content button[type="submit"]:hover {
       background: #6f9638;
@@ -318,7 +316,7 @@
       if (note.trim()) messaggio += `• Note: _${note.trim()}_\n`;
 
       const url = `https://wa.me/393440301412?text=${encodeURIComponent(messaggio)}`;
-      window.open(history, '_blank');
+      window.open(url, '_blank');
     });
   </script>
 </body>
