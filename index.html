@@ -4,10 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Ordina Uova Fresche</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body {
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html,
+    body {
       height: 100%;
       overflow-x: hidden;
     }
@@ -26,7 +31,7 @@
       max-width: 700px;
       width: 90%;
       text-align: center;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     }
     h1 {
       font-size: 2rem;
@@ -38,7 +43,6 @@
       margin-bottom: 1.5rem;
       color: #5c4a2e;
     }
-
     .steps {
       display: flex;
       justify-content: space-between;
@@ -48,7 +52,6 @@
       margin-bottom: 2rem;
       flex-wrap: nowrap;
     }
-
     .step {
       flex: 1;
       display: flex;
@@ -56,24 +59,25 @@
       align-items: center;
       text-align: center;
     }
-
     .step img {
       width: 60px;
       height: 60px;
       margin-bottom: 0.5rem;
       animation: bounce 2s infinite;
     }
-
     .step span {
       font-size: 0.9rem;
       color: #3e2e14;
     }
-
     @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-6px);
+      }
     }
-
     @media (max-width: 600px) {
       .step img {
         width: 40px;
@@ -83,7 +87,6 @@
         font-size: 0.75rem;
       }
     }
-
     .slider-container {
       margin-bottom: 2rem;
     }
@@ -93,7 +96,7 @@
       margin-bottom: 0.5rem;
       color: #3e2e14;
     }
-    input[type="range"] {
+    input[type='range'] {
       width: 100%;
       height: 32px;
       background: #f1e3c1;
@@ -102,7 +105,7 @@
       outline: none;
       cursor: pointer;
     }
-    input[type="range"]::-webkit-slider-thumb {
+    input[type='range']::-webkit-slider-thumb {
       appearance: none;
       width: 24px;
       height: 24px;
@@ -129,11 +132,12 @@
     .btn:hover {
       background: #c8884d;
     }
-
     .modal {
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       background: rgba(0, 0, 0, 0.6);
       display: none;
       justify-content: center;
@@ -171,14 +175,15 @@
     }
     .close-btn {
       position: absolute;
-      top: 10px; right: 15px;
+      top: 10px;
+      right: 15px;
       font-size: 1.5rem;
       background: none;
       border: none;
       color: #666;
       cursor: pointer;
     }
-    .modal-content button[type="submit"] {
+    .modal-content button[type='submit'] {
       margin-top: 1.5rem;
       background: #86b049;
       color: white;
@@ -189,7 +194,7 @@
       cursor: pointer;
       width: 100%;
     }
-    .modal-content button[type="submit"]:hover {
+    .modal-content button[type='submit']:hover {
       background: #6f9638;
     }
     #address-group {
@@ -199,7 +204,7 @@
       margin-top: auto;
       padding: 2rem;
       text-align: center;
-      background: rgba(255,250,230,0.85);
+      background: rgba(255, 250, 230, 0.85);
     }
     footer .social-icons {
       display: flex;
@@ -239,22 +244,46 @@
 
     <div class="slider-container">
       <label for="eggQuantity">Quantità uova</label>
-      <input type="range" id="eggQuantity" min="6" max="50" value="12" step="1" oninput="updateDisplay(this.value)">
-      <div class="quantity-display"><span id="qtyDisplay">12</span> uova</div>
+      <input
+        type="range"
+        id="eggQuantity"
+        min="6"
+        max="50"
+        value="12"
+        step="1"
+        oninput="updateDisplay(this.value)"
+      />
+      <div class="quantity-display">
+        <span id="qtyDisplay">12</span> uova
+      </div>
     </div>
     <button class="btn" onclick="openModal()">Ordina Ora</button>
   </div>
 
   <div class="modal" id="orderModal">
     <div class="modal-content">
-      <button class="close-btn" onclick="document.getElementById('orderModal').style.display='none'">&times;</button>
+      <button class="close-btn" onclick="document.getElementById('orderModal').style.display='none'">
+        &times;
+      </button>
       <h2>Modulo d'Ordine</h2>
       <form id="orderForm">
         <label for="name">Il tuo nome</label>
-        <input type="text" id="name" required>
+        <input type="text" id="name" required />
+
         <label for="quantitySlider">Quantità uova</label>
-        <input type="range" id="quantitySlider" min="6" max="50" value="12" step="1" oninput="syncQuantity(this.value)">
-        <div class="quantity-display"><span id="qtyDisplayModal">12</span> uova</div>
+        <input
+          type="range"
+          id="quantitySlider"
+          min="6"
+          max="50"
+          value="12"
+          step="1"
+          oninput="syncQuantity(this.value)"
+        />
+        <div class="quantity-display">
+          <span id="qtyDisplayModal">12</span> uova — <strong>Totale: € <span id="priceDisplay">4.20</span></strong>
+        </div>
+
         <label for="delivery">Modalità di consegna</label>
         <select id="delivery" onchange="toggleAddressField()">
           <option value="ritiro">Ritiro in fattoria</option>
@@ -262,10 +291,12 @@
         </select>
         <div id="address-group">
           <label for="address">Indirizzo per la consegna</label>
-          <input type="text" id="address" placeholder="Via, numero, città">
+          <input type="text" id="address" placeholder="Via, numero, città" />
         </div>
+
         <label for="note">Note (max 250 caratteri)</label>
         <textarea id="note" maxlength="250" placeholder="Es. orario preferito per ritiro o consegna..."></textarea>
+
         <button type="submit">Invia via WhatsApp</button>
       </form>
     </div>
@@ -275,25 +306,31 @@
     <div class="social-icons">
       <a href="#"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook" /></a>
       <a href="#"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram" /></a>
-      <a href="https://wa.me/393440301412"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="WhatsApp" /></a>
+      <a href="https://wa.me/393440301412"
+        ><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="WhatsApp" />
+      </a>
     </div>
     <p>&copy; 2025 Fattoria Uova Libere - Tutti i diritti riservati</p>
   </footer>
 
   <script>
+    const pricePerEgg = 0.35;
+
     function updateDisplay(val) {
-      document.getElementById("qtyDisplay").textContent = val;
+      document.getElementById('qtyDisplay').textContent = val;
     }
 
     function openModal() {
-      const qty = document.getElementById("eggQuantity").value;
-      document.getElementById("quantitySlider").value = qty;
-      document.getElementById("qtyDisplayModal").textContent = qty;
-      document.getElementById("orderModal").style.display = "flex";
+      const qty = document.getElementById('eggQuantity').value;
+      document.getElementById('quantitySlider').value = qty;
+      syncQuantity(qty);
+      document.getElementById('orderModal').style.display = 'flex';
     }
 
     function syncQuantity(val) {
-      document.getElementById("qtyDisplayModal").textContent = val;
+      document.getElementById('qtyDisplayModal').textContent = val;
+      const total = (val * pricePerEgg).toFixed(2);
+      document.getElementById('priceDisplay').textContent = total;
     }
 
     function toggleAddressField() {
@@ -302,20 +339,22 @@
       group.style.display = delivery === 'domicilio' ? 'block' : 'none';
     }
 
-    document.getElementById('orderForm').addEventListener('submit', function(e) {
+    document.getElementById('orderForm').addEventListener('submit', function (e) {
       e.preventDefault();
-      const nome = document.getElementById('name').value;
+      const nome = document.getElementById('name').value.trim();
       const qty = document.getElementById('quantitySlider').value;
+      const total = (qty * pricePerEgg).toFixed(2);
       const delivery = document.getElementById('delivery').value;
-      const indirizzo = document.getElementById('address').value;
-      const note = document.getElementById('note').value;
+      const indirizzo = document.getElementById('address').value.trim();
+      const note = document.getElementById('note').value.trim();
 
       let messaggio = `*ORDINE UOVA DA FATTORIA*\n\n`;
       messaggio += `• Nome: *${nome}*\n`;
       messaggio += `• Quantità: *${qty} uova*\n`;
+      messaggio += `• Totale: *€ ${total}*\n`;
       messaggio += `• Consegna: *${delivery === 'domicilio' ? 'A domicilio' : 'Ritiro a mano'}*\n`;
       if (delivery === 'domicilio') messaggio += `• Indirizzo: *${indirizzo}*\n`;
-      if (note.trim()) messaggio += `• Note: _${note.trim()}_\n`;
+      if (note) messaggio += `• Note: _${note}_\n`;
 
       const url = `https://wa.me/393440301412?text=${encodeURIComponent(messaggio)}`;
       window.open(url, '_blank');
@@ -323,4 +362,5 @@
   </script>
 </body>
 </html>
+
 
