@@ -350,9 +350,9 @@
 
       let messaggio = `*HAI UN NUOVO ORDINE 🎉*\n\n`;
       messaggio += `• Nome: *${nome}*\n`;
-      messaggio += `• Quantità: *${qty} uova*\n\n`;
-      messaggio += `• Totale: *€ ${total}*\n\n`;
-      messaggio += `• Consegna: *${delivery === 'domicilio' ? 'A domicilio' : 'Ritiro a mano'}*\n`;
+      messaggio += `• Quantità: *${qty} uova*\n`;
+      messaggio += `• Consegna: *${delivery === 'domicilio' ? 'A domicilio' : 'Ritiro a mano'}*\n\n`;
+      messaggio += `• Totale: *€ ${total}*\n`;
       if (delivery === 'domicilio') messaggio += `• Indirizzo: *${indirizzo}*\n`;
       if (note) messaggio += `• Note: _${note}_\n`;
 
